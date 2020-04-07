@@ -70,6 +70,8 @@ body {
 
     grid-template-rows: [first] 1fr [second] 1fr [third] 1fr [fourth] 1fr [fifth] 1fr
     [sixth] 1fr [seventh] 1fr [eighth] 1fr [ninth] 1fr [tenth] 1fr;
+    /* grid-column: 1;
+    grid-row:1; */
 }
 
 #footer {
@@ -93,7 +95,8 @@ body {
 }
 
 .image {
-    background:pink url('./Lapinpin.png') no-repeat center center / contain;
+    /* background:pink url('./Lapinpin.png') no-repeat center center / contain; */
+    background: url('./Lapinpin.png') no-repeat center center / contain;
 }
 
 /* .tete {
