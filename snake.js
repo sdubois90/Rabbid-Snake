@@ -16,7 +16,7 @@ window.addEventListener("load", function() {
     startButton.setAttribute("id", "start");
     document.getElementById('header').appendChild(startButton);
     startButton.textContent = "START";
-    startButton.addEventListener("mouseover", startGame, {
+    startButton.addEventListener("click", startGame, {
         once:true             // Just once
     });
     // Création du bouton PAUSE
@@ -24,22 +24,38 @@ window.addEventListener("load", function() {
     pauseButton.setAttribute('id','pause');
     document.getElementById('footer').appendChild(pauseButton);
     pauseButton.textContent = "PAUSE";
+
 });
 
 
 
-// Initialisation du Snake sur 1 case
+
 function startGame() {
-    // let snake = document.getElementsByClassName('box')[Math.floor(Math.random()*100)];
+
+    let pauseButton = document.getElementById('pause');
+    let paused = false;
+
+    
+    
     let box = document.getElementsByClassName('box');
 
-    box[0].style.background = "pink url('./Lapinpin.png') no-repeat center center / contain";
+    let info = {
+        alive: true,
+        x:0,
+        y:0,
+        direction: "right",
+        suprise: true
+    }
 
-    // let snakeX = box.style.gridColumn[info[1]];
-    // let snakeY = box.style.gridRow[info[2]];
+    let appleIndex = {
+        x:0,
+        y:0
+    };
 
-    let info = [ { alive: true }, { x:1 }, {y:1}, {direction:"D"} ];
+    let snakeLength = 1;
+   
     const keyState = {};
+
     window.onkeydown = function(event) {   // ou window.onkeydown = (e) => {keyState[e.code] = true;}
     keyState[event.code] = true;
     }
@@ -47,61 +63,131 @@ function startGame() {
         keyState[event.code] = false;
     }
 
-    gameLoop();
-    
-    function gameLoop () {
-        let snakeAlive = info[0].alive;
 
+
+
+
+
+    // Affiliée à window.onkeyup/onkeydown, donc il est pris en compte à chaque fois que l'on appuie sur une touche
+    function changeDirection(){
+
+        if (keyState["ArrowDown"]) {
+            info.direction = "down";
+
+        } else if (keyState["ArrowUp"]) {
+            info.direction = "up";
+    
+        } else if (keyState["ArrowLeft"]) {
+            info.direction = "left";
+            
+        } else if (keyState["ArrowRight"]) {
+            info.direction = "right";
+        }
+    }
+    
+    setInterval(() => {
+        changeDirection();
+    },1)
+    
+
+    function gameLoop () {
+        // Snake is alive
+        let snakeAlive = info.alive;
+
+        // prompt("Appuyer sur une touche pour reprendre la partie")
+
+        // First Apple appears and Snake too
+        apple = surpriseAppears();
+        box[info.x + info.y].style.background = "pink url('./Lapinpin.png') no-repeat center center / contain";
+
+        function surpriseAppears () {
+            appleIndex.x = Math.floor(Math.random()*10);    // Chiffre 0-9
+            appleIndex.y = Math.floor(Math.random()*10)*10; // Nombre 10-90 par dizaines
+            box[appleIndex.x + appleIndex.y].style.background = "#A880C5 url('./loup.png') no-repeat center center / contain";
+            info.surprise = true;
+        }
+
+        function checkSurprise () {
+            if (box[info.x + info.y] === box[appleIndex.x + appleIndex.y]) {
+                snakeLength++;
+                info.surprise = false;
+                surpriseAppears();
+            }
+        }
+        
+        
+        // Boucle du jeu
         setInterval(function () {
 
-            if (snakeAlive) {
+             // Pauses the game with the pauseButton
+            pauseButton.addEventListener('click', pause);
 
-                switch (info[3].direction) {
-                    case "D":
-                        info[1].x += 1;
-                        box[0].style.gridColumn = info[1].x;
-                        // debugger;
+            function pause () {
+                if (!paused) {
+                    paused = true;
+                } else if (paused) {
+                    paused = false;
+                }
+            }
+            if (paused) {return;}
+        
+
+            if (snakeAlive) {
+        
+        //Checks if the Apple is eaten
+                checkSurprise();
+
+                switch (info.direction) {
+                    case "right":
+                        // On définit x et y, et on les sépare dans la box[x+y], car si on n'avait que des x, on ne pourrait pas tourner à droite
+                        // par exemple en étant sur la 2e ligne, car x serait plus grand que 10
+                        // Ici, si on est case 55, alors "y" représente les dizaines et "x" les unités
+                        box[info.x + info.y].style.background = "rgb(165,202,73)";
+                        info.x += 1;
+                        if(info.x >= 10){
+                            info.x = 0;
+                        }
+                        box[info.x + info.y].style.background = "pink url('./Lapinpin.png') no-repeat center center / contain";
                         break;
-                    case "G":
-                        info[1].x -= 1;
-                        box[0].style.gridColumn = info[1].x;
+
+                    case "left":
+                        box[info.x + info.y].style.background = "rgb(165,202,73)";
+                        if(info.x <= 0){
+                            info.x = 10;
+                        }
+                        info.x -= 1;
+                        box[info.x + info.y].style.background = "pink url('./Lapinpin.png') no-repeat center center / contain";
                         break;
-                    case "H":
-                        info[2].y -= 1;
-                        box[0].style.gridRow = info[2].y;
+
+                    case "up":
+                        box[info.x + info.y].style.background = "rgb(165,202,73)";
+                        info.y -= 10;
+                        if(info.y<=-10) {
+                           info.y=90;
+                        }
+                        box[info.x + info.y].style.background = "pink url('./Lapinpin.png') no-repeat center center / contain";
                         break;
-                    case "B":
-                        info[2].y+1;
-                         box[0].style.gridRow = info[2].y;
+
+                    case "down":
+                        box[info.x + info.y].style.background = "rgb(165,202,73)";
+                        info.y +=10;
+                        if (info.y >= 100) {
+                            info.y = 0;
+                        }
+                        box[info.x + info.y].style.background = "pink url('./Lapinpin.png') no-repeat center center / contain";
                         break;
                 }
             
-            if (keyState["ArrowDown"]) {
-                info[3].direction = "B";
-                info[2].y+1;
-                box[0].style.gridRow = info[2].y;
-
-            } else if (keyState["ArrowUp"]) {
-                info[3].direction = "H";
-                info[2].y -= 1;
-                box[0].style.gridRow = info[2].y;
-
-            } else if (keyState["ArrowLeft"]) {
-                info[3].direction = "G";
-                info[1].x -= 1;
-                box[0].style.gridColumn = info[1].x;
-                
-            } else if (keyState["ArrowRight"]) {
-                info[3].direction = "D";
-                info[1].x += 1;
-                box[0].style.gridColumn = info[1].x;
+         
+    
+            } else if (!snakeAlive) {
+                console.log("You lost");
             }
-
-        } else if (!snakeAlive) {
-            console.log("You lost");
-        }
-    }, 1000);
+        
+    }, 300);
 
     // event.preventDefault(); // Prevents the arrow keys from scrolling the window
     }
+    gameLoop();
 }
+

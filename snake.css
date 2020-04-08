@@ -24,7 +24,7 @@ body {
 #header {
     width:10vmin;
     height:85vmin;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     align-self:flex-end;
     flex-grow:1;
     display:flex;
@@ -38,13 +38,13 @@ body {
     width:45%;
     color:white;
     font-size:3vmin;
-    transition:transform 0.5s linear 0s;
-    backface-visibility: hidden;
+    /* transition:transform 0.5s linear 0s;
+    backface-visibility: hidden; */
 }
 
-#start:hover {
+/* #start:hover {
     transform: rotateY(-180deg);
-}
+} */
 
 #pause {
     background-color: orange;
@@ -61,7 +61,7 @@ body {
     /* flex-grow:1; */
     /* margin: 0 auto; */
     display:grid;
-    grid-gap: 5px;
+    grid-gap: 1px;
     /* grid-gap: 0 0; */
     /* grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr); */
@@ -77,7 +77,7 @@ body {
 #footer {
     width:10vmin;
     height:85vmin;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     align-self:flex-end;
     flex-grow:1;
     display:flex;
@@ -85,19 +85,71 @@ body {
     justify-content: center;
 }
 
-.box:nth-child(odd) {
-    /* border:1px solid black; */
+.box {
     background-color: rgb(165,202,73);
 }
 
-.box:nth-child(even) {
+/* .box:nth-child(odd) {
+    background-color: rgb(165,202,73);
+} */
+
+/* .box:nth-child(even) {
     background-color: rgb(152, 192, 50);
-}
+} */
 
 .image {
     /* background:pink url('./Lapinpin.png') no-repeat center center / contain; */
     background: url('./Lapinpin.png') no-repeat center center / contain;
 }
+
+
+@media all and (max-width: 1025px) {
+    
+    #main-container {
+        padding-top:3%;
+        display:block;
+        margin: 0 auto;
+    }
+    #header {
+        width:90vw;
+        height:10vh;
+        margin: 0 auto;
+    }
+    #grid-container {
+        height:85vmin;
+        width:90vmin;
+        display:grid;
+        grid-gap: 1px;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        margin: 0 auto;
+    }
+    #footer {
+        width:90vw;
+        height:10vh;
+        margin: 0 auto;
+    }
+    
+    #start {
+        background-color: green;
+        height:50%;
+        width:45%;
+        color:white;
+        font-size:3vmin;
+        transition:transform 0.5s linear 0s;
+        backface-visibility: hidden;
+    }
+    
+    #pause {
+        background-color: orange;
+        height:50%;
+        width:45%;
+        color:white;
+        font-size:3vmin;
+    }
+}
+
+
 
 /* .tete {
     background-color: red;
