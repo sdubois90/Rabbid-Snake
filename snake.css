@@ -97,6 +97,11 @@ body {
     background-color: rgb(152, 192, 50);
 } */
 
+#score {
+    
+}
+
+
 .image {
     /* background:pink url('./Lapinpin.png') no-repeat center center / contain; */
     background: url('./Lapinpin.png') no-repeat center center / contain;
@@ -132,8 +137,8 @@ body {
     
     #start {
         background-color: green;
-        height:50%;
-        width:45%;
+        height:65%;
+        width:50%;
         color:white;
         font-size:3vmin;
         transition:transform 0.5s linear 0s;
@@ -142,8 +147,8 @@ body {
     
     #pause {
         background-color: orange;
-        height:50%;
-        width:45%;
+        height:65%;
+        width:50%;
         color:white;
         font-size:3vmin;
     }
