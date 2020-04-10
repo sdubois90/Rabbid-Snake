@@ -44,9 +44,10 @@ window.addEventListener("load", function () {
 function startGame() {
 	let reset = document.getElementById("start");
 	reset.textContent = "RESET";
-	// Resets the score
-	let score = document.querySelector("#score span");
-	score.innerHTML = 0;
+	// Reloads the page upon clicking RESET
+	reset.addEventListener("click", function() {
+		window.location.reload(true);
+	});
 	// Starts the background music
 	let startMusic = new Howl({
 		src: ['./start.mp3'],
@@ -57,6 +58,7 @@ function startGame() {
 	let pauseButton = document.getElementById('pause');
     let paused = false;
 	let box = document.getElementsByClassName('box');
+	let score = document.querySelector("#score span");
 	let lose = document.getElementById("lose");
 	lose.style.display = "none";
 	let info = {
@@ -258,13 +260,9 @@ function startGame() {
 							clearInterval(intervalId);
 							lose.style.display = "block";
 							lose.innerHTML = `YOUR SCORE = ${info.score}`;
-							// let reset = document.getElementById("start");
-							// reset.textContent = "RESET";
-							for (let i = 0; i<100; i++) {
-							box[i].style.background = "rgb(165,202,73)";
-							}
-							reset.addEventListener("click", startGame, {
-								once: true, // Just once
+							// Reloads the page upon clicking RESET
+							reset.addEventListener("click", function() {
+								window.location.reload(true);
 							});
 						}
 
@@ -273,13 +271,9 @@ function startGame() {
 							clearInterval(intervalId);
 							lose.style.display = "block";
 							lose.innerHTML = `YOUR SCORE = ${info.score}`;
-							// let reset = document.getElementById("start");
-							// reset.textContent = "RESET";
-							for (let i = 0; i<100; i++) {
-								box[i].style.background = "rgb(165,202,73)";
-								}
-							reset.addEventListener("click", startGame, {
-								once: true, // Just once
+							// Reloads the page upon clicking RESET
+							reset.addEventListener("click", function() {
+								window.location.reload(true);
 							});
 						}
 					}
