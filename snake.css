@@ -11,10 +11,10 @@ html {
 
 body {
     background-color: #FBFBFB;
+    position: relative;
 }
 
 #main-container {
-    padding-top:3%;
     display:flex;
     justify-content:space-around;
     align-items:center;
@@ -24,7 +24,6 @@ body {
 #header {
     width:10vmin;
     height:85vmin;
-    /* border: 1px solid black; */
     align-self:flex-end;
     flex-grow:1;
     display:flex;
@@ -77,7 +76,6 @@ body {
 #footer {
     width:10vmin;
     height:85vmin;
-    /* border: 1px solid black; */
     align-self:flex-end;
     flex-grow:1;
     display:flex;
@@ -97,14 +95,42 @@ body {
     background-color: rgb(152, 192, 50);
 } */
 
+#score-section {
+    height:5vw;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+
 #score {
-    
+    font-size: 5vmin;
+    font-weight:800;
+    text-align:center;
+    width:50%;
 }
 
 
 .image {
     /* background:pink url('./Lapinpin.png') no-repeat center center / contain; */
     background: url('./Lapinpin.png') no-repeat center center / contain;
+}
+
+#lose {
+    width: 100vmin;
+    height: 45vmin;
+    background-color: white;
+    color:blue;
+    font-weight: bolder;
+    font-size:9vmin;
+    position:absolute;
+    top:calc(50% - 45vmin/2);
+    right:calc(50% - 100vmin/2);
+    display:none;
+    z-index: 99;
+    text-align:center;
+    padding-top:16vh;
+    border:1px solid black;
 }
 
 
@@ -151,6 +177,28 @@ body {
         width:50%;
         color:white;
         font-size:3vmin;
+    }
+
+    #score-section {
+        padding-top:4vh;
+        padding-bottom: 0.5vh;
+    }
+
+    #lose {
+        width: 75vmin;
+        height: 40vmin;
+        background-color: white;
+        color:blue;
+        font-weight: bolder;
+        font-size:10vmin;
+        position:absolute;
+        top:calc(50% - 40vmin/2);
+        right:calc(50% - 75vmin/2);
+        display:none;
+        z-index: 99;
+        text-align:center;
+        line-height:10vh;
+        padding-top:1.5vh;
     }
 }
 
