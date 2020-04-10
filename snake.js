@@ -42,7 +42,8 @@ window.addEventListener("load", function () {
 
 
 function startGame() {
-
+	let reset = document.getElementById("start");
+	reset.textContent = "RESET";
 	// Resets the score
 	let score = document.querySelector("#score span");
 	score.innerHTML = 0;
@@ -257,8 +258,8 @@ function startGame() {
 							clearInterval(intervalId);
 							lose.style.display = "block";
 							lose.innerHTML = `YOUR SCORE = ${info.score}`;
-							let reset = document.getElementById("start");
-							reset.textContent = "RESET";
+							// let reset = document.getElementById("start");
+							// reset.textContent = "RESET";
 							for (let i = 0; i<100; i++) {
 							box[i].style.background = "rgb(165,202,73)";
 							}
@@ -272,8 +273,8 @@ function startGame() {
 							clearInterval(intervalId);
 							lose.style.display = "block";
 							lose.innerHTML = `YOUR SCORE = ${info.score}`;
-							let reset = document.getElementById("start");
-							reset.textContent = "RESET";
+							// let reset = document.getElementById("start");
+							// reset.textContent = "RESET";
 							for (let i = 0; i<100; i++) {
 								box[i].style.background = "rgb(165,202,73)";
 								}
